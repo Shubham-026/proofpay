@@ -21,16 +21,16 @@ const STEP_ORDER: Record<JobStatus, number> = {
   submitted: 3,
   verified: 4,
   paid: 5,
-  disputed: 3, // alternate branch
-  refunded: 5, // terminal branch
+  disputed: 3,
+  refunded: 5,
 };
 
 export function Stepper({ status }: StepperProps) {
   const currentIndex = STEP_ORDER[status] ?? 0;
 
   return (
-    <div className="w-full bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 rounded-[6px] p-3 px-4 overflow-x-auto">
-      <div className="flex items-center min-w-[560px] justify-between">
+    <div className="w-full liquid-glass rounded-[12px] p-3.5 px-5 overflow-x-auto relative">
+      <div className="flex items-center min-w-[580px] justify-between">
         {STEPS.map((step, idx) => {
           const isCompleted = idx < currentIndex || (status === "paid" && idx === 5);
           const isCurrent = idx === currentIndex && status !== "paid";
@@ -38,18 +38,18 @@ export function Stepper({ status }: StepperProps) {
 
           return (
             <div key={step.key} className="flex items-center flex-1 last:flex-none">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2.5">
                 <div
-                  className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-mono shrink-0 transition-colors ${
+                  className={`w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-mono shrink-0 transition-all ${
                     isCompleted
-                      ? "bg-teal-700 text-white dark:bg-teal-600"
+                      ? "bg-gradient-to-tr from-cyan-600 to-teal-400 text-white shadow-[0_0_12px_rgba(6,182,212,0.6)] border border-cyan-300/40"
                       : isCurrent
-                      ? "border-2 border-teal-700 text-teal-800 dark:border-teal-400 dark:text-teal-300 font-bold bg-teal-50 dark:bg-teal-950/60"
-                      : "border border-zinc-300 dark:border-zinc-700 text-zinc-400 bg-zinc-50 dark:bg-zinc-800/40"
+                      ? "border-2 border-cyan-400 text-cyan-200 font-bold bg-cyan-500/20 shadow-[0_0_15px_rgba(6,182,212,0.4)] animate-pulse"
+                      : "border border-white/[0.1] text-zinc-500 bg-white/[0.03]"
                   }`}
                 >
                   {isCompleted ? (
-                    <Check className="w-3 h-3 stroke-[2.5]" />
+                    <Check className="w-3.5 h-3.5 stroke-[2.5]" />
                   ) : (
                     <span>{idx + 1}</span>
                   )}
@@ -58,10 +58,10 @@ export function Stepper({ status }: StepperProps) {
                 <span
                   className={`text-[12px] whitespace-nowrap tracking-tight ${
                     isCurrent
-                      ? "font-semibold text-zinc-900 dark:text-zinc-100"
+                      ? "font-semibold text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]"
                       : isCompleted
-                      ? "font-medium text-zinc-700 dark:text-zinc-300"
-                      : "text-zinc-400 dark:text-zinc-500"
+                      ? "font-medium text-cyan-100"
+                      : "text-zinc-500"
                   }`}
                 >
                   {step.label}
@@ -70,10 +70,10 @@ export function Stepper({ status }: StepperProps) {
 
               {idx < STEPS.length - 1 && (
                 <div
-                  className={`h-[1px] mx-2 sm:mx-3 flex-1 min-w-[20px] transition-colors ${
+                  className={`h-[2px] mx-2.5 sm:mx-4 flex-1 min-w-[24px] rounded-full transition-all ${
                     idx < currentIndex
-                      ? "bg-teal-600 dark:bg-teal-700"
-                      : "bg-zinc-200 dark:bg-zinc-800"
+                      ? "bg-gradient-to-r from-cyan-500 to-teal-400 shadow-[0_0_8px_rgba(6,182,212,0.5)]"
+                      : "bg-white/[0.08]"
                   }`}
                 />
               )}

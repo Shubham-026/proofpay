@@ -8,63 +8,71 @@ interface StatusBadgeProps {
 
 const STATUS_CONFIG: Record<
   JobStatus,
-  { label: string; dotColor: string; bgClass: string; textClass: string; borderClass: string }
+  { label: string; dotColor: string; bgClass: string; textClass: string; borderClass: string; glowClass: string }
 > = {
   drafted: {
     label: "Drafted",
-    dotColor: "bg-zinc-400",
-    bgClass: "bg-zinc-100 dark:bg-zinc-800/60",
-    textClass: "text-zinc-600 dark:text-zinc-400",
-    borderClass: "border-zinc-200 dark:border-zinc-700",
+    dotColor: "bg-zinc-400 shadow-[0_0_6px_rgba(161,161,170,0.8)]",
+    bgClass: "bg-white/[0.04]",
+    textClass: "text-zinc-300",
+    borderClass: "border-white/[0.1]",
+    glowClass: "",
   },
   criteria_approved: {
     label: "Criteria Approved",
-    dotColor: "bg-sky-500",
-    bgClass: "bg-sky-50 dark:bg-sky-950/40",
-    textClass: "text-sky-700 dark:text-sky-400",
-    borderClass: "border-sky-200 dark:border-sky-800/60",
+    dotColor: "bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.9)]",
+    bgClass: "bg-sky-500/[0.1]",
+    textClass: "text-sky-300",
+    borderClass: "border-sky-500/30",
+    glowClass: "shadow-[0_0_12px_rgba(56,189,248,0.15)]",
   },
   funded: {
     label: "Escrow Funded",
-    dotColor: "bg-emerald-500",
-    bgClass: "bg-emerald-50 dark:bg-emerald-950/40",
-    textClass: "text-emerald-700 dark:text-emerald-400",
-    borderClass: "border-emerald-200 dark:border-emerald-800/60",
+    dotColor: "bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.9)] animate-pulse",
+    bgClass: "bg-emerald-500/[0.12]",
+    textClass: "text-emerald-300 font-medium",
+    borderClass: "border-emerald-500/35",
+    glowClass: "shadow-[0_0_15px_rgba(16,185,129,0.2)]",
   },
   submitted: {
     label: "Work Submitted",
-    dotColor: "bg-amber-500",
-    bgClass: "bg-amber-50 dark:bg-amber-950/40",
-    textClass: "text-amber-700 dark:text-amber-400",
-    borderClass: "border-amber-200 dark:border-amber-800/60",
+    dotColor: "bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.9)]",
+    bgClass: "bg-amber-500/[0.12]",
+    textClass: "text-amber-300",
+    borderClass: "border-amber-500/30",
+    glowClass: "shadow-[0_0_12px_rgba(245,158,11,0.15)]",
   },
   verified: {
     label: "Tests Passed",
-    dotColor: "bg-teal-500",
-    bgClass: "bg-teal-50 dark:bg-teal-950/40",
-    textClass: "text-teal-700 dark:text-teal-400",
-    borderClass: "border-teal-200 dark:border-teal-800/60",
+    dotColor: "bg-teal-400 shadow-[0_0_8px_rgba(45,212,191,0.9)]",
+    bgClass: "bg-teal-500/[0.12]",
+    textClass: "text-teal-300 font-medium",
+    borderClass: "border-teal-500/35",
+    glowClass: "shadow-[0_0_14px_rgba(20,184,166,0.2)]",
   },
   paid: {
     label: "Payment Released",
-    dotColor: "bg-teal-600",
-    bgClass: "bg-teal-50 dark:bg-teal-950/50",
-    textClass: "text-teal-800 dark:text-teal-300",
-    borderClass: "border-teal-300 dark:border-teal-800",
+    dotColor: "bg-cyan-300 shadow-[0_0_10px_rgba(103,232,249,1)]",
+    bgClass: "bg-cyan-500/[0.15]",
+    textClass: "text-cyan-200 font-semibold",
+    borderClass: "border-cyan-400/40",
+    glowClass: "shadow-[0_0_16px_rgba(6,182,212,0.25)]",
   },
   disputed: {
     label: "In Dispute",
-    dotColor: "bg-rose-500",
-    bgClass: "bg-rose-50 dark:bg-rose-950/40",
-    textClass: "text-rose-700 dark:text-rose-400",
-    borderClass: "border-rose-200 dark:border-rose-800/60",
+    dotColor: "bg-rose-400 shadow-[0_0_8px_rgba(251,113,133,0.9)]",
+    bgClass: "bg-rose-500/[0.12]",
+    textClass: "text-rose-300",
+    borderClass: "border-rose-500/30",
+    glowClass: "shadow-[0_0_12px_rgba(244,63,94,0.18)]",
   },
   refunded: {
     label: "Refunded",
-    dotColor: "bg-zinc-500",
-    bgClass: "bg-zinc-100 dark:bg-zinc-800/60",
-    textClass: "text-zinc-700 dark:text-zinc-300",
-    borderClass: "border-zinc-300 dark:border-zinc-700",
+    dotColor: "bg-zinc-400 shadow-[0_0_6px_rgba(161,161,170,0.8)]",
+    bgClass: "bg-zinc-800/40",
+    textClass: "text-zinc-400",
+    borderClass: "border-zinc-700/50",
+    glowClass: "",
   },
 };
 
@@ -74,10 +82,11 @@ export function StatusBadge({ status, className }: StatusBadgeProps) {
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[4px] text-[12px] font-medium border tabular-nums leading-none tracking-tight",
+        "inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium border tabular-nums leading-none tracking-tight backdrop-blur-md transition-all",
         config.bgClass,
         config.textClass,
         config.borderClass,
+        config.glowClass,
         className
       )}
     >
